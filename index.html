@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy New Year</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to bottom, #000428, #004e92);
+            color: white;
+            overflow: hidden;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+            position: relative;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        h1 {
+            font-size: 4em;
+            margin: 0;
+            text-shadow: 0 0 20px #f9d423, 0 0 30px #f9d423;
+            animation: glow 2s infinite alternate;
+        }
+
+        @keyframes glow {
+            from {
+                text-shadow: 0 0 20px #f9d423, 0 0 30px #f9d423;
+            }
+            to {
+                text-shadow: 0 0 30px #f12711, 0 0 50px #f12711;
+            }
+        }
+
+        .message {
+            font-size: 1.5em;
+            margin-top: 20px;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .emoji {
+            font-size: 3em;
+            margin: 20px 0;
+            animation: bounce 1.5s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-30px);
+            }
+            60% {
+                transform: translateY(-15px);
+            }
+        }
+
+        .fireworks {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .firework {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0;
+            animation: explode 1.5s ease-out infinite;
+        }
+
+        @keyframes explode {
+            0% {
+                transform: scale(0);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(2);
+                opacity: 0;
+            }
+        }
+
+        footer {
+            position: fixed;
+            bottom: 10px;
+            width: 100%;
+            text-align: center;
+            font-size: 1em;
+            color: #ccc;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5em;
+            }
+
+            .message {
+                font-size: 1.2em;
+            }
+
+            .emoji {
+                font-size: 2em;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 2em;
+            }
+
+            .message {
+                font-size: 1em;
+            }
+
+            .emoji {
+                font-size: 1.5em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div>
+            <h1>Happy New Year, Lobna!</h1>
+            <p class="message">Wishing you a year filled with love, joy, and success. ❤️</p>
+            <div class="emoji">🎆✨🎉🎊💖</div>
+        </div>
+    </div>
+    <div class="fireworks" id="fireworks"></div>
+    <footer>With love, from your brother 💕</footer>
+
+    <audio id="newYearSound" autoplay loop>
+        <source src="https://www.example.com/newyear.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <script>
+        const colors = ['#FF5733', '#FFC300', '#DAF7A6', '#C70039', '#900C3F', '#581845'];
+
+        function createFirework() {
+            const firework = document.createElement('div');
+            const size = Math.random() * 20 + 10;
+            const x = Math.random() * window.innerWidth;
+            const y = Math.random() * window.innerHeight;
+            const color = colors[Math.floor(Math.random() * colors.length)];
+
+            firework.className = 'firework';
+            firework.style.width = `${size}px`;
+            firework.style.height = `${size}px`;
+            firework.style.background = color;
+            firework.style.top = `${y}px`;
+            firework.style.left = `${x}px`;
+
+            document.getElementById('fireworks').appendChild(firework);
+
+            setTimeout(() => firework.remove(), 1500);
+        }
+
+        setInterval(createFirework, 300);
+
+        // Ensure audio plays on mobile devices when user interacts
+        document.body.addEventListener('click', () => {
+            const audio = document.getElementById('newYearSound');
+            if (audio.paused) {
+                audio.play();
+            }
+        });
+    </script>
+</body>
+</html>
